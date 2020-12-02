@@ -1,0 +1,7 @@
+.cache/
+.idea/
+Output/
+target/
+build/
+.vscode/
+.DS_Store
