@@ -7,11 +7,33 @@ project(Learn
 		LANGUAGES CXX
 )
 
+if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
+  message(
+    FATAL_ERROR
+      "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there."
+  )
+endif()
+
 include(CMakePrintHelpers)
 include(cmake/BuildOptions.cmake)
 include(cmake/Utils.cmake)
 
 message(STATUS "Started CMake for ${PROJECT_NAME} v${PROJECT_VERSION}...\n")
+
+
+
+# ---- Add dependencies via CPM ----
+# see https://github.com/TheLartians/CPM.cmake for more info
+
+# include(cmake/CPM.cmake)
+
+
+# # PackageProject.cmake will be used to make our target installable
+# CPMAddPackage(
+#   NAME PackageProject.cmake
+#   GITHUB_REPOSITORY TheLartians/PackageProject.cmake
+#   VERSION 1.3
+# )
 
 # ---- Add source files ----
 
@@ -20,10 +42,20 @@ message(STATUS "Started CMake for ${PROJECT_NAME} v${PROJECT_VERSION}...\n")
 file(GLOB_RECURSE headers CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/include/*.h")
 file(GLOB_RECURSE sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp")
 
-set(SOURCES
-    src/Hello.cpp
-    src/main.cpp
-)
+
+if(${PROJECT_NAME}_BUILD_EXECUTABLE)
+  add_executable(${PROJECT_NAME} ${sources})
+  add_library(${PROJECT_NAME} ${headers} ${sources})
+elseif(${PROJECT_NAME}_BUILD_HEADERS_ONLY)
+  add_library(${PROJECT_NAME} INTERFACE)
+else()
+  add_library(
+    ${PROJECT_NAME}
+    ${headers}
+    ${sources}
+  )
+endif()
+
 
 set(CMAKE_CXX_STANDARD 17)
 
