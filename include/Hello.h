@@ -5,6 +5,9 @@ class Hello
 {
   public:
     void print();
+    void printf();
+
+    int add(int a, int b);
 };
 
 #endif

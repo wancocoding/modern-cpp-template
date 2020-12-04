@@ -36,6 +36,11 @@ message(STATUS "Started CMake for ${PROJECT_NAME} v${PROJECT_VERSION}...\n")
 #   VERSION 1.3
 # )
 
+# ---- Add package management ----
+# use conan
+
+include(cmake/Conan.cmake)
+
 # ---- Add source files ----
 
 # Note: globbing sources is considered bad practice as CMake's generators may not detect new files
@@ -87,6 +92,26 @@ else()
       ${CMAKE_CURRENT_SOURCE_DIR}/src
   )
 endif()
+
+# Identify and link with the specific "packages" the project uses
+#find_package(package_name package_version REQUIRED package_type [other_options])
+
+# find_package(fmt REQUIRED)
+# target_link_libraries(
+#   ${PROJECT_NAME}
+  # PUBLIC
+  #   CONAN_PKG::fmt
+  # PRIVATE
+  #   CONAN_PKG::fmt
+  #   ${PROJECT_NAME}_PROJECT_OPTIONS        
+  #   ${PROJECT_NAME}_PROJECT_WARNINGS        
+# )
+
+target_link_libraries(
+  ${PROJECT_NAME} 
+  # ${CONAN_LIBS}
+    CONAN_PKG::fmt
+)
 
 message(STATUS "Finished setting up include directories.")
 

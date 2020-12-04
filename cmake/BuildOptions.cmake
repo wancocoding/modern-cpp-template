@@ -17,7 +17,7 @@ option(${PROJECT_NAME}_WARNINGS_AS_ERRORS "Treat compiler warnings as errors." O
 # ==============================================
 # Currently supporting: Conan, Vcpkg.
 
-option(${PROJECT_NAME}_ENABLE_CONAN "Enable the Conan package manager for this project." OFF)
+option(${PROJECT_NAME}_ENABLE_CONAN "Enable the Conan package manager for this project." ON)
 option(${PROJECT_NAME}_ENABLE_VCPKG "Enable the Vcpkg package manager for this project." OFF)
 
 # ==============================================
@@ -35,3 +35,5 @@ option(${PROJECT_NAME}_USE_CATCH2 "Use the Catch2 project for creating unit test
 
 # Generate compile_commands.json for clang based tools
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+option(${PROJECT_NAME}_VERBOSE_OUTPUT "Enable verbose output, allowing for a better understanding of each step taken." ON)
