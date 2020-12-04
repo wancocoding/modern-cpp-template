@@ -49,17 +49,10 @@ file(GLOB_RECURSE headers CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/include
 file(GLOB_RECURSE sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 
 
-if(${PROJECT_NAME}_BUILD_EXECUTABLE)
-  add_executable(${PROJECT_NAME} ${sources})
-  # add_library(${PROJECT_NAME} ${headers} ${sources})
-elseif(${PROJECT_NAME}_BUILD_HEADERS_ONLY)
+if(${PROJECT_NAME}_BUILD_HEADERS_ONLY)
   add_library(${PROJECT_NAME} INTERFACE)
 else()
-  add_library(
-    ${PROJECT_NAME}
-    ${headers}
-    ${sources}
-  )
+  add_library(${PROJECT_NAME} ${headers} ${sources})
 endif()
 
 #
@@ -138,5 +131,19 @@ cmake_print_variables(headers)
 #     PRIVATE 
 #         ${PROJECT_SOURCE_DIR}/include
 # )
+
+
+if(${PROJECT_NAME}_BUILD_EXECUTABLE)
+  add_subdirectory(cmd ${CMAKE_BINARY_DIR}/cmd)
+endif()
+
+# ========================
+# Unit test
+# ========================
+if(${PROJECT_NAME}_ENABLE_UNIT_TESTING)
+  enable_testing()
+	message(STATUS "Build unit tests for the project. Tests should always be found in the test folder\n")
+  add_subdirectory(test)
+endif()
 
 # vim:set et sts=2 sw=2 ts=2 tw=99 ft=cmake: 
