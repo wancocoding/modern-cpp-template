@@ -25,7 +25,6 @@ target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 #
 # Currently supported: GoogleTest (and GoogleMock), Catch2.
 
-set(${CMAKE_PROJECT_NAME}_TEST_LIB ${CMAKE_PROJECT_NAME})
 # if(${CMAKE_PROJECT_NAME}_BUILD_EXECUTABLE)
 # 	set(${CMAKE_PROJECT_NAME}_TEST_LIB ${CMAKE_PROJECT_NAME}_LIB)
 # else()
@@ -44,8 +43,8 @@ if(${CMAKE_PROJECT_NAME}_USE_GTEST)
     PUBLIC
       GTest::GTest
       GTest::Main
+      ${CMAKE_PROJECT_NAME}
       ${GOOGLE_MOCK_LIBRARIES}
-      ${${CMAKE_PROJECT_NAME}_TEST_LIB}
   )
 elseif(${CMAKE_PROJECT_NAME}_USE_CATCH2)
   find_package(Catch2 REQUIRED)
@@ -53,7 +52,7 @@ elseif(${CMAKE_PROJECT_NAME}_USE_CATCH2)
     ${PROJECT_NAME} 
     PUBLIC
       Catch2::Catch2
-      ${${CMAKE_PROJECT_NAME}_TEST_LIB}
+      ${CMAKE_PROJECT_NAME}
   )
 else()
   message(FATAL_ERROR "Unknown testing library. Please setup your desired unit testing library by using `target_link_libraries`.")  

@@ -1,10 +1,11 @@
 #include <gtest/gtest.h>
 
-#include "cocodingcpp/Hello.h"
+#include "Hello.h"
 
 TEST(TmpAddTest, CheckValues)
 {
-    ASSERT_EQ(Hello::add(1, 2), 3);
+    Hello hi;
+    ASSERT_EQ(hi.add(1, 2), 3);
     EXPECT_TRUE(true);
 }
 
