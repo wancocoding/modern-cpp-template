@@ -9,23 +9,30 @@ My Cpp Bootstrap
 * code format with `clang-format`
 * package management by `conan` and `CPM`
 * separation of library and cmd code
+* CI integration(github action)
+* Coverage with codecov.io
 
 
 
 ## TODO
 
-* [ ] CI integration
-* [ ] Coverage with codecov.io
 * [ ] generate docs with doxygen
 
 
 ## Build
 
 ```sh
-mkdir -p build &>/dev/null
+cmake -Bbuild -DCMAKE_BUILD_TYPE=Release
+cmake --build build -j4
+```
+
+## Test
+
+```
+cmake -Bbuild -DCMAKE_BUILD_TYPE=Debug
+cmake --build build -j4
 cd build
-cmake ..
-make
+ctest --build-config Debug
 ```
 
 
