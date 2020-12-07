@@ -5,6 +5,8 @@
 TEST(TmpAddTest, CheckValues)
 {
     Hello hi;
+    hi.print();
+    hi.printf();
     ASSERT_EQ(hi.add(1, 2), 3);
     EXPECT_TRUE(true);
 }
