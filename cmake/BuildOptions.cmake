@@ -32,6 +32,13 @@ option(${PROJECT_NAME}_USE_GOOGLE_MOCK "Use the GoogleMock project for extending
 
 option(${PROJECT_NAME}_USE_CATCH2 "Use the Catch2 project for creating unit tests." OFF)
 
+option(${PROJECT_NAME}_ENABLE_CODE_COVERAGE "Enable code coverage through GCC." ON)
+
+# ==============================================
+# Doxygen
+# ==============================================
+
+option(${PROJECT_NAME}_ENABLE_DOXYGEN "Enable Doxygen documentation builds of source." OFF)
 
 # Generate compile_commands.json for clang based tools
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)

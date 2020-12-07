@@ -43,8 +43,8 @@ if(${CMAKE_PROJECT_NAME}_USE_GTEST)
     PUBLIC
       GTest::GTest
       GTest::Main
-      ${CMAKE_PROJECT_NAME}
       ${GOOGLE_MOCK_LIBRARIES}
+      ${CMAKE_PROJECT_NAME}
   )
 elseif(${CMAKE_PROJECT_NAME}_USE_CATCH2)
   find_package(Catch2 REQUIRED)
@@ -69,5 +69,10 @@ add_test(
     ${PROJECT_NAME}
 )
 
-verbose_message("Finished adding unit tests for ${CMAKE_PROJECT_NAME}.")
+if (${CMAKE_PROJECT_NAME}_ENABLE_CODE_COVERAGE)
+  target_compile_options(${CMAKE_PROJECT_NAME} PUBLIC -O0 -g -fprofile-arcs -ftest-coverage)
+  target_link_options(${CMAKE_PROJECT_NAME} PUBLIC -fprofile-arcs -ftest-coverage)
+  verbose_message("Code coverage is enabled and provided with GCC.")
+endif()
 
+verbose_message("Finished adding unit tests for ${CMAKE_PROJECT_NAME}.")
