@@ -35,7 +35,7 @@ target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 # endif()
 
 if(${CMAKE_PROJECT_NAME}_USE_GTEST)
-  find_package(GTest REQUIRED)
+  # find_package(GTest REQUIRED)
 
   if(${CMAKE_PROJECT_NAME}_USE_GOOGLE_MOCK)
 		set(GOOGLE_MOCK_LIBRARIES GTest::gmock GTest::gmock_main)
@@ -44,8 +44,9 @@ if(${CMAKE_PROJECT_NAME}_USE_GTEST)
   target_link_libraries(
     ${PROJECT_NAME} 
     PUBLIC
-      GTest::GTest
-      GTest::Main
+	  CONAN_PKG::gtest
+      # GTest::GTest
+      # GTest::Main
       ${GOOGLE_MOCK_LIBRARIES}
       ${CMAKE_PROJECT_NAME}
   )
