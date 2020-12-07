@@ -30,6 +30,9 @@ jobs:
         path: ${{ github.workspace }}/${{ env.INSTALL_LOCATION }}
         key: ${{ runner.os }}-dependencies
 
+    - name: install conan
+      run: pip3 install conan
+
     - name: configure
       run: cmake -Bbuild -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/$INSTALL_LOCATION -D${PROJECT_NAME}_ENABLE_CODE_COVERAGE=1 -DCMAKE_BUILD_TYPE=Debug
 
