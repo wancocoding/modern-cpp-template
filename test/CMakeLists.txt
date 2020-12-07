@@ -6,6 +6,9 @@ project(
   LANGUAGES CXX
 )
 
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
+
 verbose_message("Adding tests under ${CMAKE_PROJECT_NAME}Tests...")
 
 file(GLOB_RECURSE test_sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
